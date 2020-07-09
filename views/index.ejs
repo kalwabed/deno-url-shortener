@@ -1,0 +1,85 @@
+<%- include('template/header.ejs')  %>
+
+<div class="container mx-auto">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">URL Shortener</div>
+            <div class="text-gray-700 text-base">
+                <form action="/post" method="POST" enctype="multipart/form-data" class="w-full max-w-sm">
+                    <div class="md:flex md:items-center mb-6">
+                        <label for="url"
+                            class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">URL</label>
+                        <div class="md:w-2/3">
+                            <input type="text"
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                                name="url">
+                        </div>
+                    </div>
+                    <div class="md:flex md:items-center mb-6">
+                        <div class="md:w-2/3">
+                            <button
+                                class="shadow bg-green-500 hover:bg-gray-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col mt-6">
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div
+                class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th
+                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Url
+                            </th>
+                            <th
+                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Short
+                            </th>
+                            <th
+                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Click
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <% data.forEach(el => { %>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="text-sm leading-5 text-gray-900"><%= el.fullUrl %></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="ml-4">
+                                        <div class="text-sm leading-5 font-medium text-gray-900"><a
+                                                href="http://localhost:5000/<%= el.shortUrl %>"><%= el.shortUrl %></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    <%= el.click %>
+                                </span>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<%- include('template/footer.ejs')  %>
